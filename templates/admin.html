@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel - KHATAKUNJ</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>KHATAKUNJ – Admin Panel</h1>
+
+<p>Only admin can publish stories and chapters.</p>
+
+<hr>
+
+<!-- ================= NEW STORY SECTION ================= -->
+<h2>🆕 Write a New Story</h2>
+
+<form method="post">
+  <input type="hidden" name="mode" value="new">
+
+  <label>Language:</label><br>
+  <select name="lang" required>
+    <option value="en">English</option>
+    <option value="kn">Kannada</option>
+    <option value="hi">Hindi</option>
+    <option value="bn">Bengali</option>
+  </select><br><br>
+
+  <input name="story_title" placeholder="New Story Title" required><br><br>
+
+  <input name="chapter_title" placeholder="Chapter 1 Title" required><br><br>
+
+  <textarea name="content" rows="10" placeholder="Chapter 1 content..." required></textarea><br><br>
+
+  <button type="submit">Publish New Story</button>
+</form>
+
+<hr>
+
+<!-- ================= EXISTING STORY SECTION ================= -->
+<h2>🔁 Add Chapter to Existing Story</h2>
+
+<form method="post">
+  <input type="hidden" name="mode" value="existing">
+
+  <label>Language:</label><br>
+  <select name="lang" required>
+    <option value="en">English</option>
+    <option value="kn">Kannada</option>
+    <option value="hi">Hindi</option>
+    <option value="bn">Bengali</option>
+  </select><br><br>
+
+  <label>Select Story:</label><br>
+  <select name="story_title" required>
+    <option value="">-- Select Story --</option>
+    {% for s in stories %}
+      <option value="{{ s[0] }}">{{ s[0] }}</option>
+    {% endfor %}
+  </select><br><br>
+
+  <input name="chapter_no" placeholder="Chapter Number (2,3,4...)" required><br><br>
+
+  <input name="chapter_title" placeholder="Chapter Title" required><br><br>
+
+  <textarea name="content" rows="10" placeholder="Chapter content..." required></textarea><br><br>
+
+  <button type="submit">Add Chapter</button>
+</form>
+
+<hr>
+
+<p>
+  <a href="/home">⬅ Back to Home</a> |
+  <a href="/logout">🚪 Logout</a>
+</p>
+
+<footer>
+  <hr>
+  <p>© 2025 KHATAKUNJ. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
