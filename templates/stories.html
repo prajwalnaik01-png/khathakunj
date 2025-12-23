@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stories - KHATAKUNJ</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h2>Stories</h2>
+
+{% if stories %}
+  {% for s in stories %}
+    <p>
+      <a href="/story/{{ s[0] }}">{{ s[0] }}</a>
+    </p>
+  {% endfor %}
+{% else %}
+  <p>No stories added yet.</p>
+{% endif %}
+
+<a href="/home">⬅ Back to Home</a>
+
+</body>
+</html>
