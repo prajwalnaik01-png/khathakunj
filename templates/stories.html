@@ -11,11 +11,11 @@
 {% if stories %}
   {% for s in stories %}
     <p>
-      <a href="/story/{{ s[0] }}">{{ s[0] }}</a>
+      <a href="{{ url_for('story', title=s[0]) }}">{{ s[0] }}</a>
 
       {% if session.get("user") == "admin" %}
-        | <a href="/admin/delete/{{ s[0] }}"
-             onclick="return confirm('Delete entire story?')">🗑 Delete</a>
+        | <a href="/admin/edit/{{ s[0] }}">✏ Edit</a>
+        | <a href="/admin/delete/{{ s[0] }}" onclick="return confirm('Delete story?')">🗑 Delete</a>
       {% endif %}
     </p>
   {% endfor %}
@@ -27,3 +27,4 @@
 
 </body>
 </html>
+
