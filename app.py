@@ -72,7 +72,7 @@ def home():
 def about():
     return render_template("about.html")
 
-# ---------------- STORIES (WITH GENRE + LANGUAGE) ----------------
+# ---------------- STORIES (SHOW GENRE + LANGUAGE) ----------------
 @app.route("/stories")
 def stories():
     lang = get_lang()
@@ -83,6 +83,7 @@ def stories():
         SELECT DISTINCT story_title, genre, lang
         FROM chapters
         WHERE lang=?
+        ORDER BY story_title
     """, (lang,))
 
     stories = cur.fetchall()
@@ -108,7 +109,7 @@ def story(title):
     con.close()
 
     if not chapters:
-        return "<h3>No chapters found.</h3><a href='/stories'>Back</a>"
+        return "<h3>No chapters found.</h3><a href='/stories'>⬅ Back</a>"
 
     return render_template("chapters.html", title=title, chapters=chapters)
 
@@ -132,7 +133,7 @@ def chapter(id):
 
     return render_template("chapter_read.html", chapter=chapter)
 
-# ---------------- DELETE STORY (ADMIN) ----------------
+# ---------------- DELETE STORY (ADMIN ONLY) ----------------
 @app.route("/admin/delete/<title>")
 def delete_story(title):
     if session.get("user") != ADMIN_USER:
@@ -146,7 +147,7 @@ def delete_story(title):
 
     return redirect("/stories")
 
-# ---------------- EDIT STORY (ADMIN) ----------------
+# ---------------- EDIT STORY (ADMIN ONLY) ----------------
 @app.route("/admin/edit/<title>", methods=["GET", "POST"])
 def edit_story(title):
     if session.get("user") != ADMIN_USER:
@@ -181,7 +182,7 @@ def edit_story(title):
 
     return render_template("edit_story.html", title=title, chapters=chapters)
 
-# ---------------- ADMIN PANEL (ADD STORY + GENRE + LANG) ----------------
+# ---------------- ADMIN PANEL (NEW STORY + CHAPTER + GENRE + LANG) ----------------
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
     if session.get("user") != ADMIN_USER:
