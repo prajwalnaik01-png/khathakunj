@@ -9,14 +9,10 @@
 /* ===== BODY ===== */
 body {
   min-height: 100vh;
-  background: linear-gradient(
-    135deg,
-    #0f2027,
-    #203a43,
-    #2c5364
-  );
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   color: #f5f5f5;
   padding: 20px;
+  transition: background 0.4s, color 0.4s;
 }
 
 /* ===== LINKS ===== */
@@ -36,6 +32,7 @@ div[style*="border-bottom"] {
   backdrop-filter: blur(6px);
   border-radius: 10px;
   margin-bottom: 25px;
+  padding: 10px;
 }
 
 /* ===== HEADINGS ===== */
@@ -52,7 +49,7 @@ p {
   color: #e0e0e0;
 }
 
-/* ===== BUTTONS ===== */
+/* ===== BUTTONS (DEFAULT) ===== */
 button {
   background: linear-gradient(135deg, #ff512f, #dd2476);
   border: none;
@@ -81,14 +78,15 @@ input, textarea, select {
   color: white;
 }
 
-input::placeholder, textarea::placeholder {
+input::placeholder,
+textarea::placeholder {
   color: #ccc;
 }
 
 /* ===== LOGIN / REGISTER CENTER ===== */
 form {
   max-width: 420px;
-  margin: 60px auto;
+  margin: 80px auto;
   padding: 30px;
   background: rgba(0, 0, 0, 0.65);
   border-radius: 15px;
@@ -127,12 +125,59 @@ footer {
   border-radius: 15px;
 }
 
+/* ===== READER CONTROLS ===== */
+.reader-controls {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.reader-controls button {
+  margin: 5px;
+}
+
+/* ===== FIRE BUTTON ===== */
+.btn-fire {
+  background: linear-gradient(135deg, #ff512f, #ff8c00);
+}
+
+/* ===== WATER BUTTON ===== */
+.btn-water {
+  background: linear-gradient(135deg, #2193b0, #6dd5ed);
+}
+
+/* ===== NEUTRAL BUTTON ===== */
+.btn-neutral {
+  background: linear-gradient(135deg, #888, #555);
+}
+
+/* ===== NIGHT MODE ===== */
+body.night {
+  background: #0b0f14;
+  color: #e0e0e0;
+}
+
+body.night .reader {
+  background: rgba(20, 20, 20, 0.9);
+}
+
+/* ===== LIGHT MODE ===== */
+body.light {
+  background: linear-gradient(135deg, #203a43, #2c5364);
+  color: #f5f5f5;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
   body {
     padding: 10px;
   }
+
   h1 {
     font-size: 26px;
+  }
+
+  .reader {
+    padding: 20px;
+    font-size: 16px;
   }
 }
