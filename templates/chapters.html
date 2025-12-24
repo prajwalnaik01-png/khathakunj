@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ title }} | KHATAKUNJ</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h2>{{ title }}</h2>
+
+{% if message %}
+  <p>{{ message }}</p>
+{% endif %}
+
+{% if chapters %}
+  {% for c in chapters %}
+    <p>
+      📖 Chapter {{ c[1] }} – 
+      <a href="{{ url_for('chapter', id=c[0]) }}">
+        {{ c[2] }}
+      </a>
+    </p>
+  {% endfor %}
+{% endif %}
+
+<a href="/stories">⬅ Back to Stories</a>
+
+</body>
+</html>
