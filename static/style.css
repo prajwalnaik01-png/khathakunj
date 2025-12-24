@@ -1,4 +1,6 @@
-/* ===== GLOBAL RESET ===== */
+/* ===============================
+   GLOBAL RESET
+================================ */
 * {
   margin: 0;
   padding: 0;
@@ -6,16 +8,20 @@
   font-family: "Segoe UI", system-ui, sans-serif;
 }
 
-/* ===== BODY ===== */
+/* ===============================
+   BODY
+================================ */
 body {
   min-height: 100vh;
   background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   color: #f5f5f5;
   padding: 20px;
-  transition: background 0.4s, color 0.4s;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
-/* ===== LINKS ===== */
+/* ===============================
+   LINKS
+================================ */
 a {
   color: #ffb703;
   text-decoration: none;
@@ -26,7 +32,9 @@ a:hover {
   color: #ffd166;
 }
 
-/* ===== HEADINGS ===== */
+/* ===============================
+   HEADINGS
+================================ */
 h1, h2, h3 {
   color: #ffcc00;
   margin-bottom: 15px;
@@ -34,14 +42,18 @@ h1, h2, h3 {
   text-shadow: 0 0 8px rgba(255, 180, 0, 0.4);
 }
 
-/* ===== PARAGRAPHS ===== */
+/* ===============================
+   PARAGRAPHS
+================================ */
 p {
   line-height: 1.7;
   margin-bottom: 15px;
   color: #e0e0e0;
 }
 
-/* ===== BUTTONS ===== */
+/* ===============================
+   BUTTONS
+================================ */
 button {
   width: 100%;
   background: linear-gradient(135deg, #ff512f, #dd2476);
@@ -59,7 +71,9 @@ button:hover {
   box-shadow: 0 0 15px rgba(255, 81, 47, 0.7);
 }
 
-/* ===== INPUTS ===== */
+/* ===============================
+   INPUTS
+================================ */
 input, textarea, select {
   width: 100%;
   padding: 12px;
@@ -76,7 +90,9 @@ textarea::placeholder {
   color: #ccc;
 }
 
-/* ===== AUTH PAGES (LOGIN / REGISTER) ===== */
+/* ===============================
+   AUTH PAGES (LOGIN / REGISTER)
+================================ */
 .auth-page {
   min-height: 100vh;
   display: flex;
@@ -98,6 +114,7 @@ textarea::placeholder {
   border-radius: 18px;
   box-shadow: 0 0 35px rgba(255, 106, 0, 0.4);
   text-align: center;
+  animation: fadeIn 0.6s ease;
 }
 
 .auth-container h2 {
@@ -111,23 +128,26 @@ textarea::placeholder {
   color: #ccc;
 }
 
-.auth-container input {
-  margin-bottom: 15px;
-}
-
-.auth-container button {
-  width: 100%;
-  margin-top: 10px;
-}
-
 .auth-link {
   margin-top: 15px;
   font-size: 14px;
   text-align: center;
 }
 
+/* ===============================
+   NAVBAR (INLINE STYLE NAV)
+================================ */
+div[style*="border-bottom"] {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  margin-bottom: 25px;
+  padding: 10px;
+}
 
-/* ===== READER MODE ===== */
+/* ===============================
+   STORY / READER MODE
+================================ */
 .reader {
   max-width: 850px;
   margin: auto;
@@ -138,7 +158,9 @@ textarea::placeholder {
   border-radius: 18px;
 }
 
-/* ===== READER CONTROLS ===== */
+/* ===============================
+   READER CONTROLS
+================================ */
 .reader-controls {
   text-align: center;
   margin-bottom: 20px;
@@ -150,7 +172,9 @@ textarea::placeholder {
   padding: 10px 16px;
 }
 
-/* ===== FIRE / WATER BUTTONS ===== */
+/* ===============================
+   FIRE / WATER / NEUTRAL BUTTONS
+================================ */
 .btn-fire {
   background: linear-gradient(135deg, #ff512f, #ff8c00);
 }
@@ -163,7 +187,9 @@ textarea::placeholder {
   background: linear-gradient(135deg, #888, #555);
 }
 
-/* ===== NIGHT MODE ===== */
+/* ===============================
+   NIGHT MODE
+================================ */
 body.night {
   background: #0b0f14;
   color: #e0e0e0;
@@ -173,7 +199,9 @@ body.night .reader {
   background: rgba(20, 20, 20, 0.95);
 }
 
-/* ===== FOOTER ===== */
+/* ===============================
+   FOOTER
+================================ */
 footer {
   margin-top: 50px;
   text-align: center;
@@ -181,7 +209,9 @@ footer {
   font-size: 14px;
 }
 
-/* ===== ANIMATION ===== */
+/* ===============================
+   ANIMATION
+================================ */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -193,7 +223,9 @@ footer {
   }
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===============================
+   RESPONSIVE
+================================ */
 @media (max-width: 600px) {
   body {
     padding: 10px;
@@ -208,4 +240,3 @@ footer {
     font-size: 16px;
   }
 }
-
