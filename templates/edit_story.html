@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Story - {{ title }}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h2>Edit Story: {{ title }}</h2>
+
+{% for c in chapters %}
+<form method="post" style="margin-bottom:30px;">
+  <input type="hidden" name="chapter_id" value="{{ c[0] }}">
+
+  <h3>Chapter {{ c[1] }}</h3>
+
+  <input name="chapter_title" value="{{ c[2] }}" required><br><br>
+
+  <textarea name="content" rows="8" required>{{ c[3] }}</textarea><br><br>
+
+  <button type="submit">💾 Save Changes</button>
+</form>
+<hr>
+{% endfor %}
+
+<a href="/stories">⬅ Back to Stories</a>
+
+</body>
+</html>
