@@ -3,180 +3,136 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
-/* ===== BODY (FIRE + WATER THEME) ===== */
+/* ===== BODY ===== */
 body {
   min-height: 100vh;
   background: linear-gradient(
     135deg,
     #0f2027,
     #203a43,
-    #2c5364,
-    #ff512f,
-    #f09819
+    #2c5364
   );
-  background-size: 400% 400%;
-  animation: bgFlow 12s ease infinite;
   color: #f5f5f5;
-  line-height: 1.6;
   padding: 20px;
-}
-
-/* Background animation */
-@keyframes bgFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 
 /* ===== LINKS ===== */
 a {
-  color: #ffd369;
+  color: #ffb703;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: 0.3s;
 }
 
 a:hover {
-  color: #ffffff;
-  text-shadow: 0 0 6px rgba(255, 211, 105, 0.8);
+  color: #ffd166;
 }
 
 /* ===== NAVBAR ===== */
 div[style*="border-bottom"] {
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(6px);
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 /* ===== HEADINGS ===== */
-h1 {
-  text-align: center;
-  font-size: 3rem;
-  margin: 20px 0;
-  color: #ffd369;
-  text-shadow: 0 0 15px rgba(255, 165, 0, 0.6);
-}
-
-h2 {
-  color: #ffb703;
+h1, h2, h3 {
+  color: #ffcc00;
   margin-bottom: 15px;
-}
-
-h3 {
-  color: #ffd369;
-  margin-bottom: 10px;
+  text-shadow: 0 0 8px rgba(255, 180, 0, 0.4);
 }
 
 /* ===== PARAGRAPHS ===== */
 p {
-  max-width: 900px;
-  margin: 10px auto;
-  font-size: 1.05rem;
-  text-align: center;
-}
-
-/* ===== CENTER BOX (LOGIN / REGISTER / ADMIN) ===== */
-form {
-  background: rgba(0, 0, 0, 0.55);
-  max-width: 420px;
-  margin: 60px auto;
-  padding: 25px;
-  border-radius: 14px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
-  animation: fadeUp 0.8s ease;
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ===== INPUTS ===== */
-input, textarea, select {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 14px;
-  border-radius: 8px;
-  border: none;
-  outline: none;
-  font-size: 0.95rem;
-}
-
-textarea {
-  resize: vertical;
-  min-height: 120px;
+  line-height: 1.7;
+  margin-bottom: 15px;
+  color: #e0e0e0;
 }
 
 /* ===== BUTTONS ===== */
 button {
-  width: 100%;
-  padding: 12px;
-  border-radius: 25px;
+  background: linear-gradient(135deg, #ff512f, #dd2476);
   border: none;
-  background: linear-gradient(45deg, #ff512f, #f09819);
-  color: #fff;
-  font-size: 1rem;
+  padding: 10px 18px;
+  color: white;
+  font-size: 15px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px rgba(255, 100, 0, 0.6);
+  transition: 0.3s;
 }
 
 button:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 20px rgba(255, 160, 0, 0.9);
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255, 81, 47, 0.6);
+}
+
+/* ===== FORMS ===== */
+input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #ccc;
+}
+
+/* ===== LOGIN / REGISTER CENTER ===== */
+form {
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
 }
 
 /* ===== STORY LIST ===== */
 p a {
-  font-size: 1.1rem;
+  font-size: 17px;
 }
 
-/* ===== CHAPTER CONTENT ===== */
-.chapter-content, .story-content {
-  background: rgba(0, 0, 0, 0.55);
-  padding: 25px;
-  border-radius: 12px;
-  max-width: 900px;
-  margin: 30px auto;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-  animation: fadeUp 0.8s ease;
-}
-
-.chapter-content p {
-  text-align: left;
-  margin-bottom: 14px;
+/* ===== ADMIN PANEL ===== */
+hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #ffb703, transparent);
+  margin: 25px 0;
 }
 
 /* ===== FOOTER ===== */
 footer {
-  margin-top: 40px;
+  margin-top: 50px;
   text-align: center;
-  opacity: 0.85;
-  font-size: 0.9rem;
+  color: #aaa;
+  font-size: 14px;
 }
 
-/* ===== ADMIN LINKS ===== */
-a[href*="/admin"] {
-  color: #ff9f1c;
-  font-weight: bold;
+/* ===== READER MODE ===== */
+.reader {
+  max-width: 800px;
+  margin: auto;
+  font-size: 18px;
+  line-height: 1.9;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+  border-radius: 15px;
 }
 
-/* ===== MOBILE RESPONSIVE ===== */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
-  h1 {
-    font-size: 2.2rem;
+  body {
+    padding: 10px;
   }
-
-  form {
-    margin: 30px 10px;
+  h1 {
+    font-size: 26px;
   }
 }
