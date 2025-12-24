@@ -1,5 +1,48 @@
-<div class="reader">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ chapter[2] }} | KHATAKUNJ</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="light">
+
+<div class="reader-controls">
+  <button class="btn-fire" onclick="increaseFont()">A+</button>
+  <button class="btn-water" onclick="decreaseFont()">A-</button>
+  <button class="btn-neutral" onclick="toggleMode()">🌙 / ☀</button>
+</div>
+
+<div class="reader-container" id="reader">
   <h2>{{ chapter[0] }}</h2>
   <h3>Chapter {{ chapter[1] }} – {{ chapter[2] }}</h3>
+
   <p>{{ chapter[3] }}</p>
 </div>
+
+<p style="text-align:center;">
+  <a href="/stories">⬅ Back to Stories</a>
+</p>
+
+<script>
+let fontSize = 18;
+
+function increaseFont() {
+  fontSize += 2;
+  document.getElementById("reader").style.fontSize = fontSize + "px";
+}
+
+function decreaseFont() {
+  if (fontSize > 14) {
+    fontSize -= 2;
+    document.getElementById("reader").style.fontSize = fontSize + "px";
+  }
+}
+
+function toggleMode() {
+  document.body.classList.toggle("night");
+  document.body.classList.toggle("light");
+}
+</script>
+
+</body>
+</html>
