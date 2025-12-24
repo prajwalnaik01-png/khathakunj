@@ -8,7 +8,7 @@
 
 <h1>KHATAKUNJ – Admin Panel</h1>
 
-<p>Only admin can publish stories and chapters.</p>
+<p>Only admin can publish, edit, and manage stories.</p>
 
 <hr>
 
@@ -26,13 +26,28 @@
     <option value="bn">Bengali</option>
   </select><br><br>
 
-  <input name="story_title" placeholder="New Story Title" required><br><br>
+  <label>Genre:</label><br>
+  <input name="genre"
+         placeholder="Romance / Crime / Thriller"
+         required><br><br>
 
-  <input name="chapter_title" placeholder="Chapter 1 Title" required><br><br>
+  <label>Story Title:</label><br>
+  <input name="story_title"
+         placeholder="New Story Title"
+         required><br><br>
 
-  <textarea name="content" rows="10" placeholder="Chapter 1 content..." required></textarea><br><br>
+  <label>Chapter 1 Title:</label><br>
+  <input name="chapter_title"
+         placeholder="Chapter 1 Title"
+         required><br><br>
 
-  <button type="submit">Publish New Story</button>
+  <label>Chapter 1 Content:</label><br>
+  <textarea name="content"
+            rows="12"
+            placeholder="Write chapter 1 content..."
+            required></textarea><br><br>
+
+  <button type="submit">📘 Publish New Story</button>
 </form>
 
 <hr>
@@ -59,13 +74,23 @@
     {% endfor %}
   </select><br><br>
 
-  <input name="chapter_no" placeholder="Chapter Number (2,3,4...)" required><br><br>
+  <label>Chapter Number:</label><br>
+  <input name="chapter_no"
+         placeholder="2, 3, 4..."
+         required><br><br>
 
-  <input name="chapter_title" placeholder="Chapter Title" required><br><br>
+  <label>Chapter Title:</label><br>
+  <input name="chapter_title"
+         placeholder="Chapter Title"
+         required><br><br>
 
-  <textarea name="content" rows="10" placeholder="Chapter content..." required></textarea><br><br>
+  <label>Chapter Content:</label><br>
+  <textarea name="content"
+            rows="12"
+            placeholder="Write chapter content..."
+            required></textarea><br><br>
 
-  <button type="submit">Add Chapter</button>
+  <button type="submit">➕ Add Chapter</button>
 </form>
 
 <hr>
