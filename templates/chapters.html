@@ -8,22 +8,23 @@
 
 <h2>{{ title }}</h2>
 
-{% if message %}
-  <p>{{ message }}</p>
-{% endif %}
-
 {% if chapters %}
-  {% for c in chapters %}
-    <p>
-      📖 Chapter {{ c[1] }} – 
-      <a href="{{ url_for('chapter', id=c[0]) }}">
-        {{ c[2] }}
-      </a>
-    </p>
-  {% endfor %}
+  <ul>
+    {% for c in chapters %}
+      <li>
+        <a href="{{ url_for('chapter', id=c[0]) }}">
+          Chapter {{ c[1] }} – {{ c[2] }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No chapters available.</p>
 {% endif %}
 
-<a href="/stories">⬅ Back to Stories</a>
+<p>
+  <a href="/stories">⬅ Back to Stories</a>
+</p>
 
 </body>
 </html>
