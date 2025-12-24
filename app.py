@@ -5,16 +5,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 app.secret_key = "khatakunj_secret"
 
-# ================= CONFIG =================
+# ---------------- CONFIG ----------------
 ADMIN_USER = "admin"
 SUPPORTED_LANGS = ["en", "kn", "hi", "bn"]
 
 def get_db():
-    con = sqlite3.connect("khatakunj.db")
-    con.row_factory = sqlite3.Row
-    return con
+    return sqlite3.connect("khatakunj.db")
 
-# ================= LANGUAGE =================
+# ---------------- LANGUAGE ----------------
 @app.route("/set-language/<lang>")
 def set_language(lang):
     if lang in SUPPORTED_LANGS:
@@ -24,7 +22,7 @@ def set_language(lang):
 def get_lang():
     return session.get("lang", "en")
 
-# ================= LOGIN =================
+# ---------------- LOGIN ----------------
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -37,13 +35,13 @@ def login():
         row = cur.fetchone()
         con.close()
 
-        if row and check_password_hash(row["password"], p):
+        if row and check_password_hash(row[0], p):
             session["user"] = u
             return redirect("/home")
 
     return render_template("login.html")
 
-# ================= REGISTER =================
+# ---------------- REGISTER ----------------
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -53,7 +51,7 @@ def register():
         con = get_db()
         cur = con.cursor()
         cur.execute(
-            "INSERT INTO users(username,password) VALUES (?,?)",
+            "INSERT INTO users VALUES (?,?)",
             (u, generate_password_hash(p))
         )
         con.commit()
@@ -62,19 +60,19 @@ def register():
 
     return render_template("register.html")
 
-# ================= HOME =================
+# ---------------- HOME ----------------
 @app.route("/home")
 def home():
     if "user" not in session:
         return redirect("/")
     return render_template("home.html")
 
-# ================= ABOUT =================
+# ---------------- ABOUT ----------------
 @app.route("/about")
 def about():
     return render_template("about.html")
 
-# ================= STORIES LIST =================
+# ---------------- STORIES ----------------
 @app.route("/stories")
 def stories():
     lang = get_lang()
@@ -91,7 +89,7 @@ def stories():
 
     return render_template("stories.html", stories=stories)
 
-# ================= CHAPTER LIST =================
+# ---------------- CHAPTER LIST ----------------
 @app.route("/story/<title>")
 def story(title):
     lang = get_lang()
@@ -108,19 +106,18 @@ def story(title):
     con.close()
 
     if not chapters:
-        abort(404)
+        return "<h2>No chapters found for this story.</h2><a href='/stories'>Back</a>"
 
     return render_template("chapters.html", title=title, chapters=chapters)
 
-# ================= READ CHAPTER =================
+# ---------------- READ CHAPTER ----------------
 @app.route("/chapter/<int:id>")
 def chapter(id):
     con = get_db()
     cur = con.cursor()
     cur.execute("""
         SELECT story_title, chapter_no, chapter_title, content
-        FROM chapters
-        WHERE id=?
+        FROM chapters WHERE id=?
     """, (id,))
     chapter = cur.fetchone()
     con.close()
@@ -130,7 +127,7 @@ def chapter(id):
 
     return render_template("chapter_read.html", chapter=chapter)
 
-# ================= DELETE STORY (ADMIN ONLY) =================
+# ---------------- DELETE STORY (ADMIN ONLY) ----------------
 @app.route("/admin/delete/<title>")
 def delete_story(title):
     if session.get("user") != ADMIN_USER:
@@ -144,7 +141,7 @@ def delete_story(title):
 
     return redirect("/stories")
 
-# ================= ADMIN PANEL =================
+# ---------------- ADMIN ----------------
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
     if session.get("user") != ADMIN_USER:
@@ -160,10 +157,7 @@ def admin():
         content = request.form["content"]
         lang = request.form["lang"]
 
-        if mode == "new":
-            chapter_no = 1
-        else:
-            chapter_no = int(request.form["chapter_no"])
+        chapter_no = 1 if mode == "new" else request.form["chapter_no"]
 
         cur.execute("""
             INSERT INTO chapters
@@ -178,13 +172,12 @@ def admin():
 
     return render_template("admin.html", stories=stories)
 
-# ================= LOGOUT =================
+# ---------------- LOGOUT ----------------
 @app.route("/logout")
 def logout():
     session.clear()
     return redirect("/")
 
-# ================= RUN =================
+# ---------------- RUN ----------------
 if __name__ == "__main__":
     app.run(debug=True)
-
