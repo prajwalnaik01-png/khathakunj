@@ -1,18 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Register</title>
+  <title>Register | KHATAKUNJ</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="/static/style.css">
 </head>
-<body>
-<h2>Create Account</h2>
+<body class="auth-page">
 
-<form method="post">
-  <input name="username" required><br><br>
-  <input type="password" name="password" required><br><br>
-  <button>Register</button>
-</form>
+<div class="auth-container">
+  <h2>💧 CREATE ACCOUNT</h2>
+  <p class="auth-subtitle">Join KHATAKUNJ today</p>
 
-<a href="/">Login</a>
+  <form method="post">
+    <input
+      type="text"
+      name="username"
+      placeholder="Choose a username"
+      required
+    >
+
+    <input
+      type="password"
+      name="password"
+      placeholder="Create a password"
+      required
+    >
+
+    <button type="submit">Register</button>
+  </form>
+
+  <p class="auth-link">
+    Already have an account?
+    <a href="/">Login</a>
+  </p>
+</div>
+
 </body>
 </html>
