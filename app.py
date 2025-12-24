@@ -3,14 +3,14 @@ import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.secret_key = "khatakunj_secret"
+app.secret_key = "khathakunj_secret"
 
 # ---------------- CONFIG ----------------
 ADMIN_USER = "admin"
 SUPPORTED_LANGS = ["en", "kn", "hi", "bn"]
 
 def get_db():
-    return sqlite3.connect("khatakunj.db")
+    return sqlite3.connect("khathakunj.db")
 
 # ---------------- LANGUAGE ----------------
 @app.route("/set-language/<lang>")
@@ -215,3 +215,4 @@ def logout():
 # ---------------- RUN ----------------
 if __name__ == "__main__":
     app.run(debug=True)
+
