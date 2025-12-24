@@ -76,7 +76,6 @@ def about():
 @app.route("/stories")
 def stories():
     lang = get_lang()
-
     con = get_db()
     cur = con.cursor()
     cur.execute("""
@@ -93,7 +92,6 @@ def stories():
 @app.route("/story/<title>")
 def story(title):
     lang = get_lang()
-
     con = get_db()
     cur = con.cursor()
     cur.execute("""
@@ -106,7 +104,7 @@ def story(title):
     con.close()
 
     if not chapters:
-        return "<h2>No chapters found for this story.</h2><a href='/stories'>Back</a>"
+        return "<h3>No chapters found.</h3><a href='/stories'>Back</a>"
 
     return render_template("chapters.html", title=title, chapters=chapters)
 
@@ -117,7 +115,8 @@ def chapter(id):
     cur = con.cursor()
     cur.execute("""
         SELECT story_title, chapter_no, chapter_title, content
-        FROM chapters WHERE id=?
+        FROM chapters
+        WHERE id=?
     """, (id,))
     chapter = cur.fetchone()
     con.close()
@@ -141,7 +140,42 @@ def delete_story(title):
 
     return redirect("/stories")
 
-# ---------------- ADMIN ----------------
+# ---------------- EDIT STORY (ADMIN ONLY) ----------------
+@app.route("/admin/edit/<title>", methods=["GET", "POST"])
+def edit_story(title):
+    if session.get("user") != ADMIN_USER:
+        abort(403)
+
+    con = get_db()
+    cur = con.cursor()
+
+    if request.method == "POST":
+        chapter_id = request.form["chapter_id"]
+        chapter_title = request.form["chapter_title"]
+        content = request.form["content"]
+
+        cur.execute("""
+            UPDATE chapters
+            SET chapter_title=?, content=?
+            WHERE id=?
+        """, (chapter_title, content, chapter_id))
+
+        con.commit()
+        con.close()
+        return redirect("/stories")
+
+    cur.execute("""
+        SELECT id, chapter_no, chapter_title, content
+        FROM chapters
+        WHERE story_title=?
+        ORDER BY chapter_no
+    """, (title,))
+    chapters = cur.fetchall()
+    con.close()
+
+    return render_template("edit_story.html", title=title, chapters=chapters)
+
+# ---------------- ADMIN PANEL ----------------
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
     if session.get("user") != ADMIN_USER:
