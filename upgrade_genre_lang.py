@@ -1,6 +1,6 @@
 import sqlite3
 
-con = sqlite3.connect("khatakunj.db")
+con = sqlite3.connect("khathakunj.db")
 cur = con.cursor()
 
 # Add genre column
