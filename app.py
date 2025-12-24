@@ -51,7 +51,7 @@ def register():
         con = get_db()
         cur = con.cursor()
         cur.execute(
-            "INSERT INTO users VALUES (?,?)",
+            "INSERT INTO users(username,password) VALUES (?,?)",
             (u, generate_password_hash(p))
         )
         con.commit()
@@ -72,17 +72,19 @@ def home():
 def about():
     return render_template("about.html")
 
-# ---------------- STORIES ----------------
+# ---------------- STORIES (WITH GENRE + LANGUAGE) ----------------
 @app.route("/stories")
 def stories():
     lang = get_lang()
     con = get_db()
     cur = con.cursor()
+
     cur.execute("""
-        SELECT DISTINCT story_title
+        SELECT DISTINCT story_title, genre, lang
         FROM chapters
         WHERE lang=?
     """, (lang,))
+
     stories = cur.fetchall()
     con.close()
 
@@ -94,12 +96,14 @@ def story(title):
     lang = get_lang()
     con = get_db()
     cur = con.cursor()
+
     cur.execute("""
         SELECT id, chapter_no, chapter_title
         FROM chapters
         WHERE story_title=? AND lang=?
         ORDER BY chapter_no
     """, (title, lang))
+
     chapters = cur.fetchall()
     con.close()
 
@@ -113,11 +117,13 @@ def story(title):
 def chapter(id):
     con = get_db()
     cur = con.cursor()
+
     cur.execute("""
         SELECT story_title, chapter_no, chapter_title, content
         FROM chapters
         WHERE id=?
     """, (id,))
+
     chapter = cur.fetchone()
     con.close()
 
@@ -126,7 +132,7 @@ def chapter(id):
 
     return render_template("chapter_read.html", chapter=chapter)
 
-# ---------------- DELETE STORY (ADMIN ONLY) ----------------
+# ---------------- DELETE STORY (ADMIN) ----------------
 @app.route("/admin/delete/<title>")
 def delete_story(title):
     if session.get("user") != ADMIN_USER:
@@ -140,7 +146,7 @@ def delete_story(title):
 
     return redirect("/stories")
 
-# ---------------- EDIT STORY (ADMIN ONLY) ----------------
+# ---------------- EDIT STORY (ADMIN) ----------------
 @app.route("/admin/edit/<title>", methods=["GET", "POST"])
 def edit_story(title):
     if session.get("user") != ADMIN_USER:
@@ -175,7 +181,7 @@ def edit_story(title):
 
     return render_template("edit_story.html", title=title, chapters=chapters)
 
-# ---------------- ADMIN PANEL ----------------
+# ---------------- ADMIN PANEL (ADD STORY + GENRE + LANG) ----------------
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
     if session.get("user") != ADMIN_USER:
@@ -189,15 +195,17 @@ def admin():
         story_title = request.form["story_title"]
         chapter_title = request.form["chapter_title"]
         content = request.form["content"]
+        genre = request.form["genre"]
         lang = request.form["lang"]
 
         chapter_no = 1 if mode == "new" else request.form["chapter_no"]
 
         cur.execute("""
             INSERT INTO chapters
-            (story_title, chapter_no, chapter_title, content, lang)
-            VALUES (?,?,?,?,?)
-        """, (story_title, chapter_no, chapter_title, content, lang))
+            (story_title, chapter_no, chapter_title, content, genre, lang)
+            VALUES (?,?,?,?,?,?)
+        """, (story_title, chapter_no, chapter_title, content, genre, lang))
+
         con.commit()
 
     cur.execute("SELECT DISTINCT story_title FROM chapters")
@@ -215,4 +223,3 @@ def logout():
 # ---------------- RUN ----------------
 if __name__ == "__main__":
     app.run(debug=True)
-
